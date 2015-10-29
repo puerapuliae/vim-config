@@ -22,6 +22,24 @@ filetype plugin indent on
 colorscheme jellybeans
 set t_Co=256
 
+" set window pos, size and font
+if has("gui_running")
+  if !exists("g:vimrcloaded")
+    winpos 0 0
+    if !&diff
+      winsize 130 120
+    else
+      winsize 227 120
+    endif
+    let g:vimrcloaded = 1
+  endif
+endif
+
+" ignore case if search with lower case, case sensitive if searched with upper
+" case
+set ignorecase
+set smartcase
+
 " NerdTree
 " open
 map <C-n> :NERDTreeToggle<CR>
@@ -69,13 +87,17 @@ set scrolloff=8
 " Don't update the display while executing macros
 set lazyredraw
 
-" Set the textwidth to be 100 chars
-set textwidth=100
+" Don't show the current command in the lower right corner.  In OSX, if this is
+" set and lazyredraw is set then it's slow as molasses, so we unset this
+set showcmd
 
 " Various characters are "wider" than normal fixed width characters, but the
 " default setting of ambiwidth (single) squeezes them into "normal" width,
 " which sucks. Setting it to double makes it awesome.
 set ambiwidth=double
+
+" disable textwidth
+set textwidth=0
 
 " xptemplate settings
 let g:xptemplate_brace_complete = ''
