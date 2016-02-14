@@ -22,11 +22,9 @@ function! s:f.getPackageForFile(...)
     let regexes = [
                 \   [ '/src/main/scala',      '/src/main/scala' ],
                 \   [ '/src/test/scala',      '/src/test/scala' ],
-                \   [ '/src/it/scala',        '/src/it/scala' ],
-                \   [ '/src/multi-jvm/scala', '/src/multi-jvm/scala' ],
                 \   [ '/app/model/scala',     '/app/model/scala' ],
                 \   [ '/app/controllers',     '/app' ],
-                \   [ '/test/scala',          '/test/scala' ]
+		\   [ '/src',		      '/src']
                 \ ]
     for e in regexes
       let idx = match(dir, e[0])
@@ -43,45 +41,12 @@ function! s:f.classname(...)
   return expand('%:t:r')
 endfunction
 
-function! s:f.multijvmObject(...)
-  return substitute(s:f.classname(), 'Spec$', 'MultiJvmSpec', '')
-endfunction
-
-function! s:f.multijvmBase(...)
-  return substitute(s:f.classname(), 'Spec$', 'Base', '')
-endfunction
-
 function! s:f.classNameFromSpec(...)
   return substitute(s:f.classname(), 'Spec$', '', '')
 endfunction
 
 function! s:f.classNameFromTest(...)
   return substitute(s:f.classname(), 'Test$', '', '')
-endfunction
-
-function! s:f.multiJvmNode(num, ...)
-  let className = substitute(s:f.classname(), 'Spec$', 'MultiJvmNode', '') . a:num
-  let class = join(['class ' . className . ' extends AkkaRemoteSpec(' . s:f.multijvmObject() . '.nodeConfigs(' . (a:num - 1). '))',
-                  \ '                          with ImplicitSender',
-                  \ '                          with ' . s:f.multijvmBase() . ' {',
-                  \ '  import ' . s:f.multijvmObject() . '._',
-                  \ '  import ' . s:f.classNameFromSpec() . '._',
-                  \ '  val nodes = NrOfNodes',
-                  \ '',
-                  \ '  "' . s:f.classNameFromSpec() . '" should {',
-                  \ '  }',
-                  \ '}'], "\n")
-  return class
-endfunction
-
-function! s:f.multiJvmNodes(num, ...)
-  let n = 1
-  let s = ''
-  while n <= a:num
-    let s = s . s:f.multiJvmNode(n) . "\n"
-    let n = n + 1
-  endwhile
-  return s
 endfunction
 
 function! s:f.getFilenameWithPackage(...)
@@ -155,7 +120,7 @@ XPT match hint=Creates\ a\ pattern\ matching\ sequence
 XPT flat hint=Creates\ a\ new\ FlatSpec\ test\ file
 `getPackageLine()^
 
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest._
 
 class `classname()^ extends FlatSpec with Matchers {
     "A `class^" should "`spec^" in {
