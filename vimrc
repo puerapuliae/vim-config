@@ -47,6 +47,8 @@ map <C-n> :NERDTreeToggle<CR>
 " Close if only one file is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" Change working directory to file being loaded
+set autochdir
 
 " XPT
 set runtimepath+=~/.vim/xpt-personal
