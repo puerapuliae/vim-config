@@ -15,6 +15,8 @@ Plugin 'nanotech/jellybeans.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'rking/ag.vim'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
 
 call vundle#end()
 filetype plugin indent on
@@ -105,15 +107,14 @@ set textwidth=0
 let g:xptemplate_brace_complete = ''
 let g:xptemplate_key = '<Tab>'
 
+" EasyTags
+let g:home_code_dir = '/Users/bk/Development'
+let g:easytags_async = 1
+let g:easytags_auto_highlight = 0
+
 let mapleader = ","
 
-" Format scala code
-let g:scala_sort_across_groups=1
-au BufEnter *.scala setl formatprg=java\ -jar\ $HOME/.vim/scalariform.jar\ --stdin\ --stdout\ -f\ +alignParameters
-nmap <leader>f mygggqG'y
-nmap <leader>m :SortScalaImports<CR>gggqG<C-o><C-o><leader><w>
-
-" I don't want to have the default keymappings for my scala plugin evaluated
+" I don't want to have the default keymappings for scala plugin evaluated
 let g:scala_use_default_keymappings = 0
 
 nnoremap ü <C-]>
