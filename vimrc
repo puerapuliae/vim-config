@@ -11,7 +11,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'drmingdrmer/xptemplate'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'nanotech/jellybeans.vim'
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'rking/ag.vim'
 Plugin 'xolox/vim-misc'
@@ -116,5 +116,5 @@ let mapleader = ","
 " I don't want to have the default keymappings for scala plugin evaluated
 let g:scala_use_default_keymappings = 0
 
-nnoremap ü <C-]>
+nnoremap ü<C-]>
 nnoremap Ü <C-O>
