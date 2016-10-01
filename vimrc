@@ -11,11 +11,12 @@ Plugin 'tpope/vim-sensible'
 Plugin 'drmingdrmer/xptemplate'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'nanotech/jellybeans.vim'
-" Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'rking/ag.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
+Plugin 'jakwings/vim-pony'
 
 call vundle#end()
 filetype plugin indent on
@@ -36,6 +37,9 @@ if has("gui_running")
   endif
 endif
 
+set shiftwidth=2
+set softtabstop=2
+
 " ignore case if search with lower case, case sensitive if searched with upper
 " case
 set ignorecase
@@ -43,7 +47,7 @@ set smartcase
 
 " NerdTree
 " open
-map <C-n> :NERDTreeToggle<CR>
+map ä :NERDTreeToggle<CR>
 
 " Close if only one file is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -116,5 +120,5 @@ let mapleader = ","
 " I don't want to have the default keymappings for scala plugin evaluated
 let g:scala_use_default_keymappings = 0
 
-nnoremap ü<C-]>
+nnoremap ü <C-]>
 nnoremap Ü <C-O>
